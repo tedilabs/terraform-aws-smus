@@ -1,1 +1,5 @@
 # Modules
+":floppy_disk: domain":
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/domain/**/*

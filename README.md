@@ -6,6 +6,16 @@
 
 Terraform module which creates resources for SMUS (SageMaker Unified Studio) on AWS.
 
+- [domain](./modules/domain)
+
+
+## Target AWS Services
+
+Terraform Modules from [this package](https://github.com/tedilabs/terraform-aws-smus) were written to manage the following AWS Services with Terraform.
+
+- **AWS SageMaker Unified Studio**
+  - Domain
+
 
 ## Self Promotion
 
