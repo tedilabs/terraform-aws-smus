@@ -1,15 +1,15 @@
-# terraform-aws-ml
+# terraform-aws-smus
 
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/tedilabs/terraform-aws-ml?color=blue&sort=semver&style=flat-square)
-![GitHub](https://img.shields.io/github/license/tedilabs/terraform-aws-ml?color=blue&style=flat-square)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/tedilabs/terraform-aws-smus?color=blue&sort=semver&style=flat-square)
+![GitHub](https://img.shields.io/github/license/tedilabs/terraform-aws-smus?color=blue&style=flat-square)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=flat-square)](https://github.com/pre-commit/pre-commit)
 
-Terraform module which creates resources for container services on AWS.
+Terraform module which creates resources for SMUS (SageMaker Unified Studio) on AWS.
 
 
 ## Self Promotion
 
-Like this project? Follow the repository on [GitHub](https://github.com/tedilabs/terraform-aws-ml). And if you're feeling especially charitable, follow **[posquit0](https://github.com/posquit0)** on GitHub.
+Like this project? Follow the repository on [GitHub](https://github.com/tedilabs/terraform-aws-smus). And if you're feeling especially charitable, follow **[posquit0](https://github.com/posquit0)** on GitHub.
 
 
 ## License
