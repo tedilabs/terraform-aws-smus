@@ -17,6 +17,14 @@ Terraform Modules from [this package](https://github.com/tedilabs/terraform-aws-
   - Domain
 
 
+## Examples
+
+### Domain
+
+- [Domain (IAM-based)](./examples/domain-iam-based)
+- [Domain (IAM Identity Center)](./examples/domain-iam-identity-center)
+
+
 ## Self Promotion
 
 Like this project? Follow the repository on [GitHub](https://github.com/tedilabs/terraform-aws-smus). And if you're feeling especially charitable, follow **[posquit0](https://github.com/posquit0)** on GitHub.
