@@ -60,7 +60,7 @@ module "execution_role" {
   }
 
   policies = concat(
-    ["arn:aws:iam::aws:policy/SageMakerStudioDomainExecutionRolePolicy"],
+    ["arn:aws:iam::aws:policy/service-role/SageMakerStudioDomainExecutionRolePolicy"],
     var.default_execution_role.policies,
   )
   inline_policies = var.default_execution_role.inline_policies
@@ -122,7 +122,7 @@ module "service_role" {
   }
 
   policies = concat(
-    ["arn:aws:iam::aws:policy/SageMakerStudioDomainServiceRolePolicy"],
+    ["arn:aws:iam::aws:policy/service-role/SageMakerStudioDomainServiceRolePolicy"],
     var.default_service_role.policies,
   )
   inline_policies = var.default_service_role.inline_policies
