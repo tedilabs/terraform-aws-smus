@@ -78,3 +78,15 @@ output "resource_group" {
     )
   )
 }
+
+output "sharing" {
+  description = <<EOF
+  The configuration for sharing of the SageMaker Unified Studio domain.
+    `status` - An indication of whether the domain is shared with other AWS accounts. Sharing is configured through AWS RAM (Resource Access Manager). Values are `NOT_SHARED` and `SHARED_BY_ME`.
+    `shares` - The list of resource shares via RAM (Resource Access Manager).
+  EOF
+  value = {
+    status = length(module.share) > 0 ? "SHARED_BY_ME" : "NOT_SHARED"
+    shares = module.share
+  }
+}
