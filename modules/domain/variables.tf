@@ -188,7 +188,7 @@ variable "resource_group" {
 variable "shares" {
   description = <<EOF
   (Optional) A list of resource shares via RAM (Resource Access Manager). Sharing the domain with other AWS accounts allows the users of the domain to publish and consume data from those accounts. (a.k.a. associated accounts) An association can only be initiated by the domain, and the owner of the target account should accept the request. `shares` as defined below.
-    (Optional) `name` - The name of the resource share.
+    (Required) `name` - The name of the resource share.
     (Optional) `permissions` - A set of AWS RAM managed permissions to associate with the resource share. Only one managed permission can be associated with the `datazone:Domain` resource type. To grant different permissions to different principals, create multiple resource shares. Defaults to `AWSRAMPermissionsAmazonDatazoneDomainExtendedServiceAccess`. The following permissions are available for the domain, ordered from the narrowest to the broadest:
       `AWSRAMPermissionSageMakerDataZoneProjectMembershipAccess` - Grants only `datazone:GetEnvironment`, `datazone:ListProjectMemberships` and `datazone:ListGroupsForUser`. Use this when the associated account only needs to resolve the project membership of the domain.
       `AWSRAMSageMakerServicePrincipalPermissionAmazonDataZoneDomain` - Grants the asset and data source APIs along with the membership checks. Use this with `sagemaker.amazonaws.com` as `principals`, which is required before creating a data source for Amazon SageMaker AI in the project catalog.
@@ -201,7 +201,7 @@ variable "shares" {
     (Optional) `tags` - A map of tags to add to the resource share. Defaults to `{}`.
   EOF
   type = list(object({
-    name = optional(string)
+    name = string
 
     permissions = optional(set(string), ["AWSRAMPermissionsAmazonDatazoneDomainExtendedServiceAccess"])
 
