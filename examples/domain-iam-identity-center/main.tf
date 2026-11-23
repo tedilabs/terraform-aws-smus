@@ -15,7 +15,7 @@ provider "aws" {
 module "domain" {
   source = "../../modules/domain"
   # source  = "tedilabs/smus/aws//modules/domain"
-  # version = "~> 0.1.0"
+  # version = "~> 0.3.0"
 
   name        = "iam-identity-center"
   description = "This domain is created with IAM Identity Center authentication."
