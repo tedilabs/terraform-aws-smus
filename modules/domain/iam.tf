@@ -47,8 +47,9 @@ module "execution_role" {
   ]
 
   # INFO: The domain execution role is assumed on behalf of the users of the domain.
-  # So it requires `sts:TagSession` for the `datazone*` session tags, and
-  # `sts:SetContext` for the trusted identity propagation.
+  # So it allows `sts:TagSession` for the session tags (e.g. `datazone*`), and
+  # `sts:SetContext` for the trusted identity propagation. Note that the session tag keys
+  # are not restricted, and the `aws:SourceAccount` condition applies only to `sts:AssumeRole`.
   trusted_session_tagging = {
     enabled = true
   }
