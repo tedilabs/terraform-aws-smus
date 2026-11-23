@@ -54,10 +54,10 @@ variable "default_execution_role" {
     (Optional) `enabled` - Whether to create the default domain execution role. Defaults to `true`.
     (Optional) `name` - The name of the default domain execution role. Defaults to `smus-domain-$${var.name}-execution`.
     (Optional) `path` - The path of the default domain execution role. Defaults to `/`.
-    (Optional) `description` - The description of the default domain execution role.
+    (Optional) `description` - The description of the default domain execution role. Defaults to `Managed by Terraform.`.
     (Optional) `assumable_roles` - A set of IAM role ARNs that can be assumed by this role. Defaults to `[]`.
     (Optional) `policies` - A list of IAM policy ARNs to attach to the default domain execution role. `SageMakerStudioDomainExecutionRolePolicy` is always attached. Defaults to `[]`.
-    (Optional) `inline_policies` - A map of inline IAM policies to attach to the default domain execution role. (`name` => `policy`).
+    (Optional) `inline_policies` - A map of inline IAM policies to attach to the default domain execution role. (`name` => `policy`). Defaults to `{}`.
     (Optional) `permissions_boundary` - The ARN of the IAM policy to use as permissions boundary for the default domain execution role.
   EOF
   type = object({
@@ -88,10 +88,10 @@ variable "default_service_role" {
     (Optional) `enabled` - Whether to create the default service role. Defaults to `true`.
     (Optional) `name` - The name of the default service role. Defaults to `smus-domain-$${var.name}-service`.
     (Optional) `path` - The path of the default service role. Defaults to `/`.
-    (Optional) `description` - The description of the default service role.
+    (Optional) `description` - The description of the default service role. Defaults to `Managed by Terraform.`.
     (Optional) `assumable_roles` - A set of IAM role ARNs that can be assumed by this role. Defaults to `[]`.
     (Optional) `policies` - A list of IAM policy ARNs to attach to the default service role. `SageMakerStudioDomainServiceRolePolicy` is always attached. Defaults to `[]`.
-    (Optional) `inline_policies` - A map of inline IAM policies to attach to the default service role. (`name` => `policy`).
+    (Optional) `inline_policies` - A map of inline IAM policies to attach to the default service role. (`name` => `policy`). Defaults to `{}`.
     (Optional) `permissions_boundary` - The ARN of the IAM policy to use as permissions boundary for the default service role.
   EOF
   type = object({
@@ -187,8 +187,8 @@ variable "resource_group" {
 
 variable "shares" {
   description = <<EOF
-  (Optional) A list of resource shares via RAM (Resource Access Manager). Sharing the domain with other AWS accounts allows the users of the domain to publish and consume data from those accounts. (a.k.a. associated accounts) An association can only be initiated by the domain, and the owner of the target account should accept the request. `shares` as defined below.
-    (Required) `name` - The name of the resource share.
+  (Optional) A list of resource shares via RAM (Resource Access Manager). Sharing the domain with other AWS accounts allows the users of the domain to publish and consume data from those accounts. (a.k.a. associated accounts) An association can only be initiated by the domain, and the owner of the target account should accept the request. Each block of `shares` as defined below.
+    (Required) `name` - The name of the resource share. The name of the RAM resource share is generated with the name of the domain as a prefix.
     (Optional) `permissions` - A set of AWS RAM managed permissions to associate with the resource share. Only one managed permission can be associated with the `datazone:Domain` resource type. To grant different permissions to different principals, create multiple resource shares. Defaults to `AWSRAMPermissionsAmazonDatazoneDomainExtendedServiceAccess`. The following permissions are available for the domain, ordered from the narrowest to the broadest:
       `AWSRAMPermissionSageMakerDataZoneProjectMembershipAccess` - Grants only `datazone:GetEnvironment`, `datazone:ListProjectMemberships` and `datazone:ListGroupsForUser`. Use this when the associated account only needs to resolve the project membership of the domain.
       `AWSRAMSageMakerServicePrincipalPermissionAmazonDataZoneDomain` - Grants the asset and data source APIs along with the membership checks. Use this with `sagemaker.amazonaws.com` as `principals`, which is required before creating a data source for Amazon SageMaker AI in the project catalog.
@@ -196,8 +196,8 @@ variable "shares" {
       `AWSRAMPermissionAmazonDataZoneDomainFullAccessWithPortalAccess` - Extends `AWSRAMDefaultPermissionAmazonDataZoneDomain` with the portal sign-in (`datazone:GetIamPortalLoginUrl`) and the job run APIs. Also intended for an Amazon DataZone (`V1`) domain. Despite its name, this permission is narrower than the two `...ExtendedService` permissions below, because it grants none of the SageMaker Unified Studio specific APIs either.
       `AWSRAMPermissionsAmazonDatazoneDomainExtendedServiceAccess` - Extends `AWSRAMDefaultPermissionAmazonDataZoneDomain` with the SageMaker Unified Studio specific APIs like the connections, the notebooks, the compute and `datazone:GetDomainExecutionRoleCredentials`, but without the portal sign-in. This is the permission preselected by the SageMaker Unified Studio console. Use this when the associated account integrates with the domain programmatically only. (e.g. publishing data with a data source, or enabling blueprints)
       `AWSRAMPermissionsAmazonDatazoneDomainExtendedServiceWithPortalAccess` - The same as `AWSRAMPermissionsAmazonDatazoneDomainExtendedServiceAccess` plus the portal sign-in (`datazone:GetIamPortalLoginUrl`). This is the broadest permission available for the domain. Use this when the users of the associated account sign in to the SageMaker Unified Studio portal of the domain.
-    (Optional) `external_principals_allowed` - Whether to allow principals outside of the AWS Organization to associate with the resource share. The domain can be shared with any AWS account. Defaults to `false`.
-    (Optional) `principals` - A set of principals to associate with the resource share. Each principal is an AWS account ID, an AWS Organizations Organization ARN, an AWS Organizations Organizational Unit ARN, or a service principal. Defaults to `[]`.
+    (Optional) `external_principals_allowed` - Whether principals outside your organization can be associated with the resource share. The domain can be shared with any AWS account. Defaults to `false`.
+    (Optional) `principals` - A set of principals to associate with the resource share. Possible values are an AWS account ID, an ARN of an organization in AWS Organizations, an ARN of an organizational unit (OU) in AWS Organizations, or a service principal. Defaults to `[]`.
     (Optional) `tags` - A map of tags to add to the resource share. Defaults to `{}`.
   EOF
   type = list(object({
