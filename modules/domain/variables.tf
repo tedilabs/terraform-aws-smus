@@ -80,6 +80,11 @@ variable "execution_role" {
   type        = string
   default     = null
   nullable    = true
+
+  validation {
+    condition     = var.default_execution_role.enabled || var.execution_role != null
+    error_message = "`execution_role` is required if `default_execution_role.enabled` is `false`."
+  }
 }
 
 variable "default_service_role" {
@@ -114,6 +119,11 @@ variable "service_role" {
   type        = string
   default     = null
   nullable    = true
+
+  validation {
+    condition     = var.default_service_role.enabled || var.service_role != null
+    error_message = "`service_role` is required if `default_service_role.enabled` is `false`."
+  }
 }
 
 variable "encryption" {
